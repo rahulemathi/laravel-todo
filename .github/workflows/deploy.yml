@@ -21,6 +21,17 @@ jobs:
     - name: Install Composer dependencies
       run: composer install --prefer-dist --no-dev --no-progress --no-suggest
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' # You can specify any version you need
+
+    - name: Install NPM dependencies
+      run: npm install
+
+    - name: Build Assets (Optional, if you are using something like Mix or Vite)
+      run: npm run prod
+
     - name: Upload files via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
