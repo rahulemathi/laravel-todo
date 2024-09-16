@@ -22,18 +22,10 @@ jobs:
       run: composer install --prefer-dist --no-dev --no-progress --no-suggest
 
     - name: Upload files via FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.3.4
+      uses: SamKirkland/FTP-Deploy-Action@v4
       with:
         server: ftp://${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./
-       # server-dir: /path/to/your/server/public_html
-
-#     - name: Clear Laravel caches
-#       run: |
-#         ssh user@your-server.com << EOF
-#         php artisan config:cache
-#         php artisan route:cache
-#         php artisan view:cache
-#         EOF
+        server-dir: /home/your-username/public_html # Replace with your actual home directory
