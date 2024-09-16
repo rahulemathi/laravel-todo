@@ -49,5 +49,19 @@
   </div>
   @endif
     {{ $slot }}
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.done-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+            // Find the sibling <p> element and toggle the line-through style
+            const todoText = this.parentNode.querySelector('.todo-text');
+            todoText.style.textDecoration = todoText.style.textDecoration === 'line-through' ? 'none' : 'line-through';
+            const buttonText = this.parentNode.querySelector('.done-btn');
+            buttonText.innerHTML = 'Undone'
+        });
+    });
+});
+    </script>
 </body>
 </html>

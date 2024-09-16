@@ -10,7 +10,8 @@ class TodoListController extends Controller
 {
     //
     public function index(){
-        return view('home');
+        $todos = Todo::where('user_id','=',Auth::id())->get();
+        return view('home',compact('todos'));
     }
 
     public function store(Request $request){
@@ -21,5 +22,12 @@ class TodoListController extends Controller
         $todo->save();
 
         return redirect('/')->with('success','Added to Todo');
+    }
+    
+    public function destroy($id){
+        $todo = Todo::find($id);
+        $todo->delete();
+
+    return redirect('/')->with('success','Deleted to todo');
     }
 }

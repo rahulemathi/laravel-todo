@@ -16,16 +16,21 @@
                 </form>
         </div>
         <div>
+            @if($todos->isEmpty())
+            <p>Create a todo</p>
+            @else
+            @foreach($todos as $lists)
             <div class="flex mb-4 items-center">
-                <p class="w-full text-grey-darkest">Add another component to Tailwind Components</p>
-                <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green">Done</button>
-                <button class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">Remove</button>
+                <p class="w-full text-grey-darkest todo-text">{{ $lists->name }}</p>
+                <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green done-btn">Done</button>
+               <form action="/remove/{{ $lists->id }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red" type="submit">Remove</button>
+        </form>
             </div>
-          	<div class="flex mb-4 items-center">
-                <p class="w-full line-through text-green">Submit Todo App Component to Tailwind Components</p>
-                <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-grey border-grey hover:bg-grey">Not Done</button>
-                <button class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">Remove</button>
-            </div>
+            @endforeach
+            @endif
         </div>
     </div>
 </div>
