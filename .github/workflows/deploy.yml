@@ -30,7 +30,7 @@ jobs:
       run: npm install
 
     - name: Build Assets (Optional, if you are using something like Mix or Vite)
-      run: npm run dev
+      run: npm run build
 
     - name: Upload files via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
