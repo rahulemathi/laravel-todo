@@ -32,7 +32,7 @@
             @else
             @foreach($todos as $lists)
             <div class="flex mb-4 items-center">
-                <p class="w-full text-grey-darkest todo-text">{{ $lists->name }}</p>
+                <p class="w-full text-grey-darkest todo-text ">{{ $lists->name }}</p>
                 <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-blue text-green border-green hover:bg-green done-btn">Done</button>
                <form action="/remove/{{ $lists->id }}" method="post">
             @csrf
