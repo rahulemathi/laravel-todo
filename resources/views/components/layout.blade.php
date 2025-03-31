@@ -51,17 +51,27 @@
     {{ $slot }}
 
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.done-btn').forEach(function (button) {
         button.addEventListener('click', function () {
-            // Find the sibling <p> element and toggle the line-through style
             const todoText = this.parentNode.querySelector('.todo-text');
-            todoText.style.textDecoration = todoText.style.textDecoration === 'line-through' ? 'none' : 'line-through';
-            const buttonText = this.parentNode.querySelector('.done-btn');
-            buttonText.innerHTML = 'Undone'
+            const todoId = this.getAttribute('data-id'); // Get task ID from button's data-id attribute
+
+            // Send GET request to update completion status in the database
+            fetch(`/mark/${todoId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Toggle UI based on the updated completion status
+                        todoText.style.textDecoration = data.completed ? 'line-through' : 'none';
+                        this.innerHTML = data.completed ? 'Undone' : 'Done';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         });
     });
 });
+
     </script>
 </body>
 </html>

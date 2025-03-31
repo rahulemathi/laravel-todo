@@ -30,4 +30,15 @@ class TodoListController extends Controller
 
     return redirect('/')->with('success','Deleted to todo');
     }
+
+    public function markCompleted($id){
+        $todo = Todo::find($id);
+        $todo->completed= !$todo->completed;
+        $todo->save();
+
+        return response()->json([
+            'success'=> true,
+            'completed'=>$todo->completed
+        ]);
+    }
 }

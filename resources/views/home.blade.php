@@ -32,12 +32,12 @@
             @else
             @foreach($todos as $lists)
             <div class="flex mb-4 items-center">
-                <p class="w-full text-grey-darkest todo-text ">{{ $lists->name }}</p>
-                <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-blue text-green border-green hover:bg-green done-btn">Done</button>
+                <p class="w-full text-grey-darkest todo-text " style="text-decoration:{{ $lists->completed ? 'line-through' : 'none' }}">{{ $lists->name }}</p>
+                <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-blue text-green border-green hover:bg-green done-btn" data-id="{{ $lists->id }}">{{ $lists->completed ? 'Undone':'Done' }}</button>
                <form action="/remove/{{ $lists->id }}" method="post">
             @csrf
             @method('DELETE')
-            <button class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-blue hover:bg-red" type="submit">Remove</button>
+            <button class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-blue hover:bg-red" type="submit" onclick="return confirm('are you sure to delete')">Remove</button>
         </form>
             </div>
             @endforeach
